@@ -193,9 +193,9 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                               8.height,
                             ],
                           ),
-                        //TODO :: removed the handy men that the provider have still didn't change the model
-                        HandymanStaffMembersComponent(images: data.handymanImageList.validate(), handymanList: data.handymanStaffList.validate()),
-                        16.height,
+
+                        // HandymanStaffMembersComponent(images: data.handymanImageList.validate(), handymanList: data.handymanStaffList.validate()),
+                        // 16.height,
                         servicesWidget(list: data.serviceList!, providerId: widget.providerId.validate()),
                       ],
                     ).paddingAll(16),
