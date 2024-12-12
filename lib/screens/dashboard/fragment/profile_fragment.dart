@@ -195,16 +195,16 @@ class ProfileFragmentState extends State<ProfileFragment> {
                               UserWalletHistoryScreen().launch(context);
                             },
                           ),
-                        if (appStore.isLoggedIn)
-                          SettingItemWidget(
-                            leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
-                            title: language.lblBankDetails,
-                            titleTextStyle: primaryTextStyle(),
-                            trailing: trailing,
-                            onTap: () {
-                              BankDetails().launch(context);
-                            },
-                          ),
+                        // if (appStore.isLoggedIn)
+                        //   SettingItemWidget(
+                        //     leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
+                        //     title: language.lblBankDetails,
+                        //     titleTextStyle: primaryTextStyle(),
+                        //     trailing: trailing,
+                        //     onTap: () {
+                        //       BankDetails().launch(context);
+                        //     },
+                        //   ),
                         SettingItemWidget(
                           leading: ic_heart.iconImage(size: SETTING_ICON_SIZE),
                           title: language.lblFavorite,

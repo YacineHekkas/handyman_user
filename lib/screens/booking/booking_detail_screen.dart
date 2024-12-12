@@ -277,41 +277,41 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
     );
   }
 
-  Widget handymanWidget({required List<UserData> handymanList, required BookingDetailResponse res, required ServiceData serviceDetail, required BookingData bookingDetail}) {
-    if (handymanList.isEmpty) return Offstage();
-
-    if (res.providerData!.id != handymanList.first.id)
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          24.height,
-          Text(language.lblAboutHandyman, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-          16.height,
-          Column(
-            children: handymanList.map((e) {
-              return BookingDetailHandymanWidget(
-                handymanData: e,
-                serviceDetail: serviceDetail,
-                bookingDetail: bookingDetail,
-                onUpdate: () {
-                  init();
-                  setState(() {});
-                },
-              ).onTap(
-                () {
-                  HandymanInfoScreen(handymanId: e.id).launch(context).then((value) => null);
-                },
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-              );
-            }).toList(),
-          ),
-        ],
-      );
-    else
-      return Offstage();
-  }
+  // Widget handymanWidget({required List<UserData> handymanList, required BookingDetailResponse res, required ServiceData serviceDetail, required BookingData bookingDetail}) {
+  //   if (handymanList.isEmpty) return Offstage();
+  //
+  //   if (res.providerData!.id != handymanList.first.id)
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         24.height,
+  //         Text(language.lblAboutHandyman, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+  //         16.height,
+  //         Column(
+  //           children: handymanList.map((e) {
+  //             return BookingDetailHandymanWidget(
+  //               handymanData: e,
+  //               serviceDetail: serviceDetail,
+  //               bookingDetail: bookingDetail,
+  //               onUpdate: () {
+  //                 init();
+  //                 setState(() {});
+  //               },
+  //             ).onTap(
+  //               () {
+  //                 HandymanInfoScreen(handymanId: e.id).launch(context).then((value) => null);
+  //               },
+  //               hoverColor: Colors.transparent,
+  //               highlightColor: Colors.transparent,
+  //               splashColor: Colors.transparent,
+  //             );
+  //           }).toList(),
+  //         ),
+  //       ],
+  //     );
+  //   else
+  //     return Offstage();
+  // }
 
   Widget providerWidget({required BookingDetailResponse res}) {
     if (res.providerData == null) return Offstage();
@@ -1116,12 +1116,12 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
                         serviceProofListWidget(list: snap.data!.serviceProof.validate()),
 
                         /// About Handyman Card
-                        handymanWidget(
-                          handymanList: snap.data!.handymanData.validate(),
-                          res: snap.data!,
-                          serviceDetail: snap.data!.service!,
-                          bookingDetail: snap.data!.bookingDetail!,
-                        ),
+                        // handymanWidget(
+                        //   handymanList: snap.data!.handymanData.validate(),
+                        //   res: snap.data!,
+                        //   serviceDetail: snap.data!.service!,
+                        //   bookingDetail: snap.data!.bookingDetail!,
+                        // ),
 
                         /// About Provider Card
                         providerWidget(res: snap.data!),

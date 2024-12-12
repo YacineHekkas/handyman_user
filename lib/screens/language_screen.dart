@@ -28,14 +28,16 @@ class LanguagesScreenState extends State<LanguagesScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBarTitle: language.language,
-      child: LanguageListWidget(
-        widgetType: WidgetType.LIST,
-        onLanguageChange: (v) {
-          appStore.setLanguage(v.languageCode!);
-          setState(() {});
-          finish(context, true);
-        },
-      ),
+        child: LanguageListWidget(
+
+          widgetType: WidgetType.LIST,
+          onLanguageChange: (v) {
+
+            appStore.setLanguage(v.languageCode!);
+            setState(() {});
+            finish(context, true);
+          },
+        ),
     );
   }
 }
