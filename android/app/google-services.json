@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91555918792",
+    "project_id": "tryflutter-6e440",
+    "storage_bucket": "tryflutter-6e440.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91555918792:android:f9ac04abdb6c542c4f06fd",
+        "android_client_info": {
+          "package_name": "com.iqonic.servicebooking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-InVoj7_yJ1JyKTWBS5KPxO2N2TzXTi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
