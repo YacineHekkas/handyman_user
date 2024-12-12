@@ -1237,7 +1237,6 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           BookingUpdateKeys.paymentStatus: status.bookingDetail!.isAdvancePaymentDone ? SERVICE_PAYMENT_STATUS_ADVANCE_PAID : status.bookingDetail!.paymentStatus.validate(),
         };
 
-        //TODO Complete all service addon on booking
         if (status.bookingDetail!.serviceaddon.validate().isNotEmpty) {
           request.putIfAbsent(BookingUpdateKeys.serviceAddon, () => status.bookingDetail!.serviceaddon.validate().map((e) => e.id).toList());
         }

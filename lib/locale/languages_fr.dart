@@ -382,7 +382,7 @@ class LanguageFr extends BaseLanguage {
   String get lblTime => "Temps";
 
   @override
-  String get textProvider => "Fournisseur";
+  String get textProvider => "Artisan";
 
   @override
   String get lblConfirmBooking => "Confirmer la réservation";
@@ -418,7 +418,7 @@ class LanguageFr extends BaseLanguage {
   String get lblAboutHandyman => "À propos de Handyman";
 
   @override
-  String get lblAboutProvider => "À propos du fournisseur";
+  String get lblAboutProvider => "À propos du Artisan ";
 
   @override
   String get lblNotRatedYet => "Vous n'avez pas encore été évalué";
@@ -559,7 +559,7 @@ class LanguageFr extends BaseLanguage {
   String get lblWalkThroughSubTitle => "Service $APP_NAME - Application de services à domicile à la demande avec solution complète";
 
   @override
-  String get textHandyman => "Handyman";
+  String get textHandyman => "";
 
   @override
   String get lblChooseFromMap => "Choisir parmi la carte";
@@ -727,7 +727,7 @@ class LanguageFr extends BaseLanguage {
   String get lblSignInWithApple => "Connectez-vous avec Apple";
 
   @override
-  String get lblWaitingForProviderApproval => "En attente d'approbation du fournisseur";
+  String get lblWaitingForProviderApproval => "En attente d'approbation du Artisan";
 
   @override
   String get lblFree => "non payé";
@@ -748,7 +748,7 @@ class LanguageFr extends BaseLanguage {
   String get noConversation => "Aucune conversation";
 
   @override
-  String get noConversationSubTitle => "Vous n'avez pas encore fait de conversation. Remplissez un service pour discuter avec un fournisseur.";
+  String get noConversationSubTitle => "Vous n'avez pas encore fait de conversation. Remplissez un service pour discuter avec un Artisan.";
 
   @override
   String get noBookingSubTitle => "On dirait que vous n'avez pas encore réservé votre commande";
@@ -760,7 +760,7 @@ class LanguageFr extends BaseLanguage {
   String get noCategoryFound => "Aucune catégorie trouvée";
 
   @override
-  String get noProviderFound => "Aucun fournisseur trouvé";
+  String get noProviderFound => "Aucun Artisan trouvé";
 
   @override
   String get createServiceRequest => "Créer une demande de service";
@@ -865,7 +865,7 @@ class LanguageFr extends BaseLanguage {
   String get bidder => 'Soumissionnaire';
 
   @override
-  String get assignedProvider => 'Fournisseur assigné';
+  String get assignedProvider => 'Artisan assigné';
 
   @override
   String get myPostDetail => 'Mon détail';
@@ -889,7 +889,7 @@ class LanguageFr extends BaseLanguage {
   String get noPostJobFound => 'Aucun poste de poste trouvé';
 
   @override
-  String get noPostJobFoundSubtitle => 'Lorsque vous publiez votre travail, chaque fournisseur sera informé et vous pouvez choisir votre fournisseur souhaité pour faire le travail.';
+  String get noPostJobFoundSubtitle => 'Lorsque vous publiez votre travail, chaque Artisan sera informé et vous pouvez choisir votre Artisan souhaité pour faire le travail.';
 
   @override
   String get pleaseEnterValidOTP => 'Veuillez saisir OTP valide';
@@ -1048,10 +1048,10 @@ class LanguageFr extends BaseLanguage {
   String get lblConfirmationForDeleteMsg => 'Voulez-vous supprimer le message ?';
 
   @override
-  String get favouriteProvider => 'Fournisseur préféré';
+  String get favouriteProvider => 'Artisan préféré';
 
   @override
-  String get noProviderFoundMessage => 'Vos fournisseurs préférés apparaîtront ici';
+  String get noProviderFoundMessage => 'Vos Artisan préférés apparaîtront ici';
 
   @override
   String get personalInfo => 'Informations personnelles';
@@ -1273,10 +1273,10 @@ class LanguageFr extends BaseLanguage {
   String get closeApp => "Fermer l'application";
 
   @override
-  String get providerAddedToFavourite => 'Fournisseur ajouté à la liste préférée';
+  String get providerAddedToFavourite => 'Artisan ajouté à la liste préférée';
 
   @override
-  String get providerRemovedFromFavourite => 'Fournisseur supprimé de la liste préférée';
+  String get providerRemovedFromFavourite => 'Artisan supprimé de la liste préférée';
 
   @override
   String get provideValidCurrentPasswordMessage => 'Vous devez fournir un mot de passe actuel valide';
@@ -1456,7 +1456,7 @@ class LanguageFr extends BaseLanguage {
   String get team => 'Équipe';
 
   @override
-  String get whyChooseMeAs => 'Pourquoi me choisir comme fournisseur de services de confiance';
+  String get whyChooseMeAs => 'Pourquoi me choisir comme Artisan de confiance';
 
   @override
   String get reason => 'Raison';
@@ -1738,7 +1738,7 @@ class LanguageFr extends BaseLanguage {
   String get canTFindYourServices => 'Vous ne trouvez pas vos services ?';
 
   @override
-  String get trackProviderLocation => 'Localisation du fournisseur de suivi';
+  String get trackProviderLocation => 'Localisation du Artisan de suivi';
 
   @override
   String get trackHandymanLocation => "Suivre l'emplacement du bricoleur";
@@ -1747,7 +1747,7 @@ class LanguageFr extends BaseLanguage {
   String get handymanLocation => 'Emplacement du bricoleur';
 
   @override
-  String get providerLocation => 'Emplacement du fournisseur';
+  String get providerLocation => 'Emplacement du Artisan';
 
   @override
   String get lastUpdatedAt => 'Dernière mise à jour à :';
@@ -1759,7 +1759,7 @@ class LanguageFr extends BaseLanguage {
   String get handymanReached => 'Bricoleur atteint ? Cliquez pour commencer';
 
   @override
-  String get providerReached => 'Fournisseur atteint ? Cliquez pour commencer';
+  String get providerReached => 'Artisan atteint ? Cliquez pour commencer';
 
   @override
   String get lblBankDetails => "Coordonnées bancaires";

@@ -382,7 +382,7 @@ class LanguageAr extends BaseLanguage {
   String get lblTime => "الوقت";
 
   @override
-  String get textProvider => "مزود";
+  String get textProvider => "حرفي";
 
   @override
   String get lblConfirmBooking => "تأكيد الحجز";
@@ -418,7 +418,7 @@ class LanguageAr extends BaseLanguage {
   String get lblAboutHandyman => "حول العمل اليدوي";
 
   @override
-  String get lblAboutProvider => "حول مزود";
+  String get lblAboutProvider => "حول الحرفي";
 
   @override
   String get lblNotRatedYet => "لم تقيم بعد";
@@ -727,7 +727,7 @@ class LanguageAr extends BaseLanguage {
   String get lblSignInWithApple => "تسجيل الدخول مع Apple";
 
   @override
-  String get lblWaitingForProviderApproval => "في انتظار موافقة المزود";
+  String get lblWaitingForProviderApproval => "في انتظار موافقة الحرفي";
 
   @override
   String get lblFree => "غير مدفوع الأجر";
@@ -760,7 +760,7 @@ class LanguageAr extends BaseLanguage {
   String get noCategoryFound => "لم يتم العثور على فئة";
 
   @override
-  String get noProviderFound => "لم يتم العثور على مزود";
+  String get noProviderFound => "لم يتم العثور على حرفي";
 
   @override
   String get createServiceRequest => "إنشاء طلب خدمة";
@@ -865,7 +865,7 @@ class LanguageAr extends BaseLanguage {
   String get bidder => 'مزايد';
 
   @override
-  String get assignedProvider => 'مزود مخصص';
+  String get assignedProvider => 'حرفي مخصص';
 
   @override
   String get myPostDetail => 'تفاصيل ما بعد ذلك';
@@ -889,7 +889,7 @@ class LanguageAr extends BaseLanguage {
   String get noPostJobFound => 'لم يتم العثور على وظيفة بعد';
 
   @override
-  String get noPostJobFoundSubtitle => 'عندما تنشر وظيفتك ، سيتم إخطار كل مزود ، ويمكنك اختيار مزودك المطلوب لإنجاز المهمة.';
+  String get noPostJobFoundSubtitle => 'عندما تنشر وظيفتك ، سيتم إخطار كل حرفي ، ويمكنك اختيار الحرفي المطلوب لإنجاز المهمة.';
 
   @override
   String get pleaseEnterValidOTP => 'الرجاء إدخال OTP صالح';
@@ -1048,7 +1048,7 @@ class LanguageAr extends BaseLanguage {
   String get lblConfirmationForDeleteMsg => 'هل تريد حذف الرسالة؟';
 
   @override
-  String get favouriteProvider => 'المزود المفضل';
+  String get favouriteProvider => 'الحرفي المفضل';
 
   @override
   String get noProviderFoundMessage => 'سيظهر مقدمي الخدمات المفضلين لديك هنا';
@@ -1456,7 +1456,7 @@ class LanguageAr extends BaseLanguage {
   String get team => 'فريق';
 
   @override
-  String get whyChooseMeAs => 'لماذا تختارني كمزود خدمة موثوق به';
+  String get whyChooseMeAs => 'لماذا تختارني كحرفي لخدمتك';
 
   @override
   String get reason => 'سبب';
@@ -1738,7 +1738,7 @@ class LanguageAr extends BaseLanguage {
   String get canTFindYourServices => 'لا تستطيع العثور على خدماتك؟';
 
   @override
-  String get trackProviderLocation => 'تتبع موقع المزود';
+  String get trackProviderLocation => 'تتبع موقع الحرفي';
 
   @override
   String get trackHandymanLocation => 'تتبع موقع العامل الماهر';
@@ -1747,7 +1747,7 @@ class LanguageAr extends BaseLanguage {
   String get handymanLocation => 'موقع العامل الماهر';
 
   @override
-  String get providerLocation => 'موقع المزود';
+  String get providerLocation => 'موقع الحرفي';
 
   @override
   String get lastUpdatedAt => 'آخر تحديث في:';
@@ -1759,7 +1759,7 @@ class LanguageAr extends BaseLanguage {
   String get handymanReached => 'هل وصل العامل الماهر؟ انقر لتبدأ';
 
   @override
-  String get providerReached => 'هل وصل المزود؟ انقر لتبدأ';
+  String get providerReached => 'هل وصل الحرفي؟ انقر لتبدأ';
 
   @override
   String get addBank => "أضف البنك";
