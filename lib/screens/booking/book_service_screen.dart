@@ -128,6 +128,12 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
   }
 
   void setPrice() {
+
+    //todo  i added this to bypass the taxes
+    widget.data.taxes?.forEach((tax) {
+      tax.value = 0;
+      tax.totalCalculatedValue = 0;
+    });
     bookingAmountModel = finalCalculations(
       servicePrice: widget.data.serviceDetail!.price.validate(),
       appliedCouponData: appliedCouponData,
@@ -671,33 +677,34 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
                   ),
 
                 /// Tax Amount Applied on Price
-                Column(
-                  children: [
-                    Divider(height: 26, color: context.dividerColor),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Text(language.lblTax, style: secondaryTextStyle(size: 14)).expand(),
-                            if (widget.data.taxes.validate().isNotEmpty)
-                              Icon(Icons.info_outline_rounded, size: 20, color: context.primaryColor).onTap(
-                                () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (_) {
-                                      return AppliedTaxListBottomSheet(taxes: widget.data.taxes.validate(), subTotal: bookingAmountModel.finalSubTotal);
-                                    },
-                                  );
-                                },
-                              ),
-                          ],
-                        ).expand(),
-                        16.width,
-                        PriceWidget(price: bookingAmountModel.finalTotalTax, color: Colors.red, isBoldText: true),
-                      ],
-                    ),
-                  ],
-                ),
+                // todo remove taxes
+                // Column(
+                //   children: [
+                //     Divider(height: 26, color: context.dividerColor),
+                //     Row(
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Text(language.lblTax, style: secondaryTextStyle(size: 14)).expand(),
+                //             if (widget.data.taxes.validate().isNotEmpty)
+                //               Icon(Icons.info_outline_rounded, size: 20, color: context.primaryColor).onTap(
+                //                 () {
+                //                   showModalBottomSheet(
+                //                     context: context,
+                //                     builder: (_) {
+                //                       return AppliedTaxListBottomSheet(taxes: widget.data.taxes.validate(), subTotal: bookingAmountModel.finalSubTotal);
+                //                     },
+                //                   );
+                //                 },
+                //               ),
+                //           ],
+                //         ).expand(),
+                //         16.width,
+                //         PriceWidget(price: bookingAmountModel.finalTotalTax, color: Colors.red, isBoldText: true),
+                //       ],
+                //     ),
+                //   ],
+                // ),
 
                 /// Final Amount
                 Column(

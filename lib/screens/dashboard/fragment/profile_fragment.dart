@@ -169,32 +169,33 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       headingDecoration: BoxDecoration(color: context.primaryColor.withOpacity(0.1)),
                       divider: Offstage(),
                       items: [
-                        if (appStore.isLoggedIn && appConfigurationStore.isEnableUserWallet)
-                          SettingItemWidget(
-                            leading: ic_un_fill_wallet.iconImage(size: SETTING_ICON_SIZE),
-                            title: language.walletBalance,
-                            titleTextStyle: primaryTextStyle(),
-                            onTap: () {
-                              if (appConfigurationStore.onlinePaymentStatus) {
-                                UserWalletBalanceScreen().launch(context);
-                              }
-                            },
-                            trailing: Text(
-                              appStore.userWalletAmount.toPriceFormat(),
-                              style: boldTextStyle(color: Colors.green),
-                            ),
-                          ),
-                        16.height,
-                        if (appStore.isLoggedIn && appConfigurationStore.isEnableUserWallet)
-                          SettingItemWidget(
-                            leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
-                            title: language.walletHistory,
-                            titleTextStyle: primaryTextStyle(),
-                            trailing: trailing,
-                            onTap: () {
-                              UserWalletHistoryScreen().launch(context);
-                            },
-                          ),
+                        // if (appStore.isLoggedIn && appConfigurationStore.isEnableUserWallet)
+                        //   SettingItemWidget(
+                        //     leading: ic_un_fill_wallet.iconImage(size: SETTING_ICON_SIZE),
+                        //     title: language.walletBalance,
+                        //     titleTextStyle: primaryTextStyle(),
+                        //     onTap: () {
+                        //       if (appConfigurationStore.onlinePaymentStatus) {
+                        //         UserWalletBalanceScreen().launch(context);
+                        //       }
+                        //     },
+                        //     trailing: Text(
+                        //       appStore.userWalletAmount.toPriceFormat(),
+                        //       style: boldTextStyle(color: Colors.green),
+                        //     ),
+                        //   ),
+                        // 16.height,
+                        //todo removed
+                        // if (appStore.isLoggedIn && appConfigurationStore.isEnableUserWallet)
+                        //   SettingItemWidget(
+                        //     leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
+                        //     title: language.walletHistory,
+                        //     titleTextStyle: primaryTextStyle(),
+                        //     trailing: trailing,
+                        //     onTap: () {
+                        //       UserWalletHistoryScreen().launch(context);
+                        //     },
+                        //   ),
                         // if (appStore.isLoggedIn)
                         //   SettingItemWidget(
                         //     leading: ic_document.iconImage(size: SETTING_ICON_SIZE),
