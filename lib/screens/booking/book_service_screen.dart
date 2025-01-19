@@ -332,9 +332,10 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Observer(builder: (context) {
-                    return WalletBalanceComponent().visible(appConfigurationStore.isEnableUserWallet && widget.data.serviceDetail!.isFixedService);
-                  }),
+                  //todo removed wallet balance
+                  // Observer(builder: (context) {
+                  //   return WalletBalanceComponent().visible(appConfigurationStore.isEnableUserWallet && widget.data.serviceDetail!.isFixedService);
+                  // }),
                   16.height,
                   Text(language.disclaimer, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                   Text(language.disclaimerContent, style: secondaryTextStyle()),

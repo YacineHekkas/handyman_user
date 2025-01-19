@@ -234,35 +234,35 @@ class PriceCommonWidget extends StatelessWidget {
                       Divider(height: 26, color: context.dividerColor),
                     ],
                   ),
-
-                if (bookingDetail.finalTotalTax.validate() != 0 && bookingDetail.bookingType.validate() == BOOKING_TYPE_SERVICE)
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(language.lblTax, style: secondaryTextStyle(size: 14)).expand(),
-                              Icon(Icons.info_outline_rounded, size: 20, color: context.primaryColor).onTap(
-                                () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (_) {
-                                      return AppliedTaxListBottomSheet(taxes: bookingDetail.taxes.validate(), subTotal: bookingDetail.finalSubTotal.validate());
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          ).expand(),
-                          16.width,
-                          PriceWidget(price: bookingDetail.finalTotalTax.validate(), color: Colors.red, isBoldText: true),
-                        ],
-                      ),
-                      Divider(height: 26, color: context.dividerColor),
-                    ],
-                  ),
+                //todo :: removed tax
+                // if (bookingDetail.finalTotalTax.validate() != 0 && bookingDetail.bookingType.validate() == BOOKING_TYPE_SERVICE)
+                //   Column(
+                //     children: [
+                //       Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Row(
+                //             children: [
+                //               Text(language.lblTax, style: secondaryTextStyle(size: 14)).expand(),
+                //               Icon(Icons.info_outline_rounded, size: 20, color: context.primaryColor).onTap(
+                //                 () {
+                //                   showModalBottomSheet(
+                //                     context: context,
+                //                     builder: (_) {
+                //                       return AppliedTaxListBottomSheet(taxes: bookingDetail.taxes.validate(), subTotal: bookingDetail.finalSubTotal.validate());
+                //                     },
+                //                   );
+                //                 },
+                //               ),
+                //             ],
+                //           ).expand(),
+                //           16.width,
+                //           PriceWidget(price: bookingDetail.finalTotalTax.validate(), color: Colors.red, isBoldText: true),
+                //         ],
+                //       ),
+                //       Divider(height: 26, color: context.dividerColor),
+                //     ],
+                //   ),
 
                 /// Final Amount
                 Row(

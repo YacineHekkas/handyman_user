@@ -63,17 +63,17 @@ DateTime todayDate = DateTime(2022, 8, 24);
 
 Country defaultCountry() {
   return Country(
-    phoneCode: '91',
-    countryCode: 'IN',
-    e164Sc: 91,
+    phoneCode: '213',
+    countryCode: 'DZ',
+    e164Sc: 213,
     geographic: true,
     level: 1,
-    name: 'India',
-    example: '9123456789',
-    displayName: 'India (IN) [+91]',
-    displayNameNoCountryCode: 'India (IN)',
-    e164Key: '91-IN-0',
-    fullExampleWithPlusSign: '+919123456789',
+    name: 'Algeria',
+    example: '551234567',
+    displayName: 'Algeria (DZ) [+213]',
+    displayNameNoCountryCode: 'Algeria (DZ)',
+    e164Key: '213-DZ-0',
+    fullExampleWithPlusSign: '+213551234567',
   );
 }
 

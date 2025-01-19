@@ -108,7 +108,16 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.4.13
   mobx_codegen: ^2.6.1
-  #flutter packages pub run build_runner build --delete-conflicting-outputs
+#  flutter_launcher_icons: "^0.14.2"
+#
+#flutter_launcher_icons:
+#  android: "launcher_icon"
+#  ios: true
+#  image_path: "assets/ic_app_logo.png"
+#  min_sdk_android: 23 # android min sdk min:16, default 21
+#  adaptive_icon_background: "#fffffff"
+#  adaptive_icon_foreground: "assets/ic_app_logo.png"
+
 
 flutter:
   uses-material-design: true
