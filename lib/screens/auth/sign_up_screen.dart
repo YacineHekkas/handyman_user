@@ -124,30 +124,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  Future<void> changeCountry() async {
-    showCountryPicker(
-      context: context,
-      countryListTheme: CountryListThemeData(
-        textStyle: secondaryTextStyle(color: textSecondaryColorGlobal),
-        searchTextStyle: primaryTextStyle(),
-        inputDecoration: InputDecoration(
-          labelText: language.search,
-          prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color(0xFF8C98A8).withOpacity(0.2),
-            ),
-          ),
-        ),
-      ),
-
-      showPhoneCode: true, // optional. Shows phone code before the country name.
-      onSelect: (Country country) {
-        selectedCountry = country;
-        setState(() {});
-      },
-    );
-  }
+  // Future<void> changeCountry() async {
+  //   showCountryPicker(
+  //     context: context,
+  //     countryListTheme: CountryListThemeData(
+  //       textStyle: secondaryTextStyle(color: textSecondaryColorGlobal),
+  //       searchTextStyle: primaryTextStyle(),
+  //       inputDecoration: InputDecoration(
+  //         labelText: language.search,
+  //         prefixIcon: const Icon(Icons.search),
+  //         border: OutlineInputBorder(
+  //           borderSide: BorderSide(
+  //             color: const Color(0xFF8C98A8).withOpacity(0.2),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //
+  //     showPhoneCode: true, // optional. Shows phone code before the country name.
+  //     onSelect: (Country country) {
+  //       selectedCountry = country;
+  //       setState(() {});
+  //     },
+  //   );
+  // }
 
   void registerUser() async {
     hideKeyboard(context);
@@ -293,7 +293,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ).paddingOnly(left: 8),
                 ),
               ),
-            ).onTap(() => changeCountry()),
+            ),
+                // .onTap(() => changeCountry()),
             10.width,
             // Mobile number text field...
             AppTextField(
@@ -307,7 +308,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: '${language.lblExample}: ${selectedCountry.example}',
                 hintStyle: secondaryTextStyle(),
               ),
-              maxLength: 15,
+              maxLength: 9,
               suffix: ic_calling.iconImage(size: 10).paddingAll(14),
             ).expand(),
           ],

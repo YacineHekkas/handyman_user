@@ -56,10 +56,10 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     /// For Demo Purpose
-    if (await isIqonicProduct) {
-      emailCont.text = DEFAULT_EMAIL;
-      passwordCont.text = DEFAULT_PASS;
-    }
+    // if (await isIqonicProduct) {
+    //   emailCont.text = DEFAULT_EMAIL;
+    //   passwordCont.text = DEFAULT_PASS;
+    // }
   }
 
   //region Methods
