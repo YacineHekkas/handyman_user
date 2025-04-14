@@ -183,16 +183,16 @@ class _ServiceDetailHeaderComponentState extends State<ServiceDetailHeaderCompon
                         ],
                       ),
                       4.height,
-                      TextIcon(
-                        edgeInsets: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                        text: '${language.duration}',
-                        textStyle: secondaryTextStyle(size: 14),
-                        expandedText: true,
-                        suffix: Text(
-                          "${convertToHourMinute(widget.serviceDetail.duration.validate())}",
-                          style: boldTextStyle(color: primaryColor),
-                        ),
-                      ),
+                      // TextIcon(
+                      //   edgeInsets: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                      //   text: '${language.duration}',
+                      //   textStyle: secondaryTextStyle(size: 14),
+                      //   expandedText: true,
+                      //   suffix: Text(
+                      //     "${convertToHourMinute(widget.serviceDetail.duration.validate())}",
+                      //     style: boldTextStyle(color: primaryColor),
+                      //   ),
+                      // ),
                       TextIcon(
                         text: '${language.lblRating}',
                         textStyle: secondaryTextStyle(size: 14),
