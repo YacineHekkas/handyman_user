@@ -1,3 +1,4 @@
+import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/component/disabled_rating_bar_widget.dart';
 import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/main.dart';
@@ -20,13 +21,19 @@ class BookingDetailProviderWidget extends StatefulWidget {
   final bool providerIsHandyman;
   final BookingData? bookingDetail;
 
-  BookingDetailProviderWidget({required this.providerData, this.canCustomerContact = false, this.providerIsHandyman = false, this.bookingDetail});
+  BookingDetailProviderWidget(
+      {required this.providerData,
+      this.canCustomerContact = false,
+      this.providerIsHandyman = false,
+      this.bookingDetail});
 
   @override
-  BookingDetailProviderWidgetState createState() => BookingDetailProviderWidgetState();
+  BookingDetailProviderWidgetState createState() =>
+      BookingDetailProviderWidgetState();
 }
 
-class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget> {
+class BookingDetailProviderWidgetState
+    extends State<BookingDetailProviderWidget> {
   UserData userData = UserData();
 
   bool isChattingAllow = false;
@@ -60,23 +67,42 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
         children: [
           Row(
             children: [
-              ImageBorder(src: widget.providerData.profileImage.validate(), height: 70),
+              Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: borderColor ?? context.dividerColor, width: 1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: CachedImageWidget(
+                    url: widget.providerData.profileImage.validate(),
+                    circle: true,
+                    height: 70,
+                    width: null,
+                    fit: BoxFit.cover,
+                  )),
+              // ImageBorder(src: widget.providerData.profileImage.validate(), height: 70),
               16.width,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Text(widget.providerData.displayName.validate(), style: boldTextStyle()).flexible(),
+                      Text(widget.providerData.displayName.validate(),
+                              style: boldTextStyle())
+                          .flexible(),
                       16.width,
                       ic_info.iconImage(size: 20),
                     ],
                   ),
                   4.height,
-                  DisabledRatingBarWidget(rating: widget.providerData.providersServiceRating.validate()),
+                  DisabledRatingBarWidget(
+                      rating: widget.providerData.providersServiceRating
+                          .validate()),
                 ],
               ).expand(),
-              Image.asset(ic_verified, height: 24, width: 24, color: verifyAcColor).visible(widget.providerData.isVerifyProvider == 1),
+              Image.asset(ic_verified,
+                      height: 24, width: 24, color: verifyAcColor)
+                  .visible(widget.providerData.isVerifyProvider == 1),
             ],
           ),
           if (widget.canCustomerContact)
@@ -88,7 +114,10 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                   onTap: () {
                     launchMail("${widget.providerData.email.validate()}");
                   },
-                  prefix: Image.asset(ic_message, width: 20, height: 20, color: appStore.isDarkMode ? Colors.white : Colors.black),
+                  prefix: Image.asset(ic_message,
+                      width: 20,
+                      height: 20,
+                      color: appStore.isDarkMode ? Colors.white : Colors.black),
                   text: widget.providerData.email.validate(),
                   expandedText: true,
                 ),
@@ -100,10 +129,16 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                       TextIcon(
                         spacing: 10,
                         onTap: () {
-                          launchMap("${widget.providerData.address.validate()}");
+                          launchMap(
+                              "${widget.providerData.address.validate()}");
                         },
                         expandedText: true,
-                        prefix: Image.asset(ic_location, width: 20, height: 20, color: appStore.isDarkMode ? Colors.white : Colors.black),
+                        prefix: Image.asset(ic_location,
+                            width: 20,
+                            height: 20,
+                            color: appStore.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
                         text: '${widget.providerData.address.validate()}',
                       ),
                     ],
@@ -116,7 +151,10 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                       launchCall(widget.providerData.contactNumber.validate());
                     }
                   },
-                  prefix: Image.asset(ic_calling, width: 20, height: 20, color: appStore.isDarkMode ? Colors.white : Colors.black),
+                  prefix: Image.asset(ic_calling,
+                      width: 20,
+                      height: 20,
+                      color: appStore.isDarkMode ? Colors.white : Colors.black),
                   text: '${widget.providerData.contactNumber.validate()}',
                   expandedText: true,
                 ),
@@ -132,7 +170,8 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                       children: [
                         ic_calling.iconImage(size: 18, color: Colors.white),
                         8.width,
-                        Text(language.lblCall, style: boldTextStyle(color: white)),
+                        Text(language.lblCall,
+                            style: boldTextStyle(color: white)),
                       ],
                     ).fit(),
                     width: context.width(),
@@ -157,16 +196,24 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                   color: context.scaffoldBackgroundColor,
                   onTap: () async {
                     toast(language.pleaseWaitWhileWeLoadChatDetails);
-                    UserData? user = await userService.getUserNull(email: widget.providerData.email.validate());
+                    UserData? user = await userService.getUserNull(
+                        email: widget.providerData.email.validate());
                     if (user != null) {
                       Fluttertoast.cancel();
                       if (widget.bookingDetail != null) {
-                        isChattingAllow = widget.bookingDetail!.status == BookingStatusKeys.complete || widget.bookingDetail!.status == BookingStatusKeys.cancelled;
+                        isChattingAllow = widget.bookingDetail!.status ==
+                                BookingStatusKeys.complete ||
+                            widget.bookingDetail!.status ==
+                                BookingStatusKeys.cancelled;
                       }
-                      UserChatScreen(receiverUser: user, isChattingAllow: isChattingAllow).launch(context);
+                      UserChatScreen(
+                              receiverUser: user,
+                              isChattingAllow: isChattingAllow)
+                          .launch(context);
                     } else {
                       Fluttertoast.cancel();
-                      toast("${widget.providerData.firstName} ${language.isNotAvailableForChat}");
+                      toast(
+                          "${widget.providerData.firstName} ${language.isNotAvailableForChat}");
                     }
                   },
                 ).expand(),
@@ -177,12 +224,19 @@ class BookingDetailProviderWidgetState extends State<BookingDetailProviderWidget
                   color: context.scaffoldBackgroundColor,
                   onTap: () async {
                     String phoneNumber = "";
-                    if (widget.providerData.contactNumber.validate().contains('+')) {
-                      phoneNumber = "${widget.providerData.contactNumber.validate().replaceAll('-', '')}";
+                    if (widget.providerData.contactNumber
+                        .validate()
+                        .contains('+')) {
+                      phoneNumber =
+                          "${widget.providerData.contactNumber.validate().replaceAll('-', '')}";
                     } else {
-                      phoneNumber = "+${widget.providerData.contactNumber.validate().replaceAll('-', '')}";
+                      phoneNumber =
+                          "+${widget.providerData.contactNumber.validate().replaceAll('-', '')}";
                     }
-                    launchUrl(Uri.parse('${getSocialMediaLink(LinkProvider.WHATSAPP)}$phoneNumber'), mode: LaunchMode.externalApplication);
+                    launchUrl(
+                        Uri.parse(
+                            '${getSocialMediaLink(LinkProvider.WHATSAPP)}$phoneNumber'),
+                        mode: LaunchMode.externalApplication);
                   },
                 ),
               ],
