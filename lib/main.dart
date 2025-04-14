@@ -2,6 +2,7 @@ import 'package:booking_system_flutter/app_theme.dart';
 import 'package:booking_system_flutter/locale/app_localizations.dart';
 import 'package:booking_system_flutter/locale/language_en.dart';
 import 'package:booking_system_flutter/locale/languages.dart';
+import 'package:booking_system_flutter/locale/languages_fr.dart';
 import 'package:booking_system_flutter/model/booking_detail_model.dart';
 import 'package:booking_system_flutter/model/get_my_post_job_list_response.dart';
 import 'package:booking_system_flutter/model/material_you_model.dart';
@@ -57,7 +58,7 @@ AppConfigurationStore appConfigurationStore = AppConfigurationStore();
 //endregion
 
 //region Global Variables
-BaseLanguage language = LanguageEn();
+BaseLanguage language = LanguageFr();
 //endregion
 
 //region Services
@@ -116,6 +117,9 @@ void main() async {
 
   await initialize();
   localeLanguageList = languageList();
+
+  appStore.setLanguage(
+      getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE));
 
   int themeModeIndex = getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
   if (themeModeIndex == THEME_MODE_LIGHT) {

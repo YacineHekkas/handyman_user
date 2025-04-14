@@ -11,7 +11,7 @@ const DOMAIN_URL = 'https://riglni.com'; // Don't add slash at the end of the ur
 
 const BASE_URL = '$DOMAIN_URL/api/';
 
-const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_LANGUAGE = 'fr';
 
 /// You can change this to your Provider App package name
 /// This will be used in Registered As Partner in Sign In Screen where your users can redirect to the Play/App Store for Provider App
@@ -31,7 +31,7 @@ const REFUND_POLICY_URL = 'https://iqonic.design/licensing-terms-more/#refund-po
 const INQUIRY_SUPPORT_EMAIL = 'hello@iqonic.design';
 
 /// You can add help line number here for contact. It's demo number
-const HELP_LINE_NUMBER = '+15265897485';
+const HELP_LINE_NUMBER = '+213557223510';
 
 //Airtel Money Payments
 ///It Supports ["UGX", "NGN", "TZS", "KES", "RWF", "ZMW", "CFA", "XOF", "XAF", "CDF", "USD", "XAF", "SCR", "MGA", "MWK"]

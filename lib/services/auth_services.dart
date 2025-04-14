@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
@@ -77,18 +78,22 @@ class AuthService {
 
   //endregion
 
-  //region Google Login
+  // region Google Login
   Future<User> signInWithGoogle(BuildContext context) async {
+    print("--------------------------> 1");
     final GoogleSignIn googleSignIn = GoogleSignIn();
     GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-
+    print("--------------------------> 1b");
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+      print("--------------------------> 2");
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
+      print("--------------------------> $credential");
 
       final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
       final User user = authResult.user!;
@@ -114,6 +119,24 @@ class AuthService {
     }
   }
 
+
+
+  String _getFirebaseErrorText(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'account-exists-with-different-credential':
+        return 'Account already exists with different credentials';
+      case 'invalid-credential':
+        return 'Invalid authentication credentials';
+      case 'operation-not-allowed':
+        return 'Google sign-in is not enabled';
+      case 'user-disabled':
+        return 'User account is disabled';
+      case 'user-not-found':
+        return 'No user found for this email';
+      default:
+        return 'Authentication failed';
+    }
+  }
   //endregion
 
   //region Apple Sign In
@@ -178,4 +201,5 @@ class AuthService {
     }
   }
 //endregion
+
 }

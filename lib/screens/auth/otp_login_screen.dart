@@ -84,6 +84,8 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
 
       toast(language.sendingOTP);
 
+      print("------------>+${selectedCountry.phoneCode}${numberController.text.trim()}");
+
       try {
         await FirebaseAuth.instance.verifyPhoneNumber(
           phoneNumber: "+${selectedCountry.phoneCode}${numberController.text.trim()}",
