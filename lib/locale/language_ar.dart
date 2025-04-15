@@ -103,10 +103,10 @@ class LanguageAr extends BaseLanguage {
   String get selectCountry => 'حدد الدولة';
 
   @override
-  String get selectState => 'اختر مدينة';
+  String get selectState => 'اختر ولايتك';
 
   @override
-  String get selectCity => 'اختر مدينة';
+  String get selectCity => 'اختر دائرتك ';
 
   @override
   String get changePassword => 'تغيير كلمة المرور';

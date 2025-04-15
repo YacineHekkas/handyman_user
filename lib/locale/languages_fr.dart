@@ -102,10 +102,10 @@ class LanguageFr extends BaseLanguage {
   String get selectCountry => "Choisissez le pays";
 
   @override
-  String get selectState => "Sélectionnez l'état";
+  String get selectState => "Sélectionnez votre Wilaya";
 
   @override
-  String get selectCity => "Sélectionnez une ville";
+  String get selectCity => "Sélectionnez votre Daïra";
 
   @override
   String get changePassword => "Changer le mot de passe";

@@ -102,10 +102,10 @@ class LanguageEn extends BaseLanguage {
   String get selectCountry => 'Select Country';
 
   @override
-  String get selectState => 'Select State';
+  String get selectState => 'Select Wilaya ';
 
   @override
-  String get selectCity => 'Select City';
+  String get selectCity => 'Select Daïra ';
 
   @override
   String get changePassword => 'Change Password';
