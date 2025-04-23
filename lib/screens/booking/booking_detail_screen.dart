@@ -939,9 +939,14 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
   }
 
   Widget _action({required BookingDetailResponse bookingResponse}) {
-    if ((bookingResponse.service != null && bookingResponse.service!.isAdvancePayment && !bookingResponse.service!.isFreeService && bookingResponse.service!.isFixedService && bookingResponse.bookingDetail!.bookingPackage == null) &&
-        (bookingResponse.bookingDetail!.paymentStatus == null ||
-            (bookingResponse.bookingDetail!.paymentStatus == SERVICE_PAYMENT_STATUS_ADVANCE_PAID && bookingResponse.bookingDetail!.status == BookingStatusKeys.complete))) {
+    if ((bookingResponse.service != null
+        && bookingResponse.service!.isAdvancePayment
+        && !bookingResponse.service!.isFreeService
+        && bookingResponse.service!.isFixedService
+        && bookingResponse.bookingDetail!.bookingPackage == null)
+        && (bookingResponse.bookingDetail!.paymentStatus == null ||
+            (bookingResponse.bookingDetail!.paymentStatus == SERVICE_PAYMENT_STATUS_ADVANCE_PAID
+                && bookingResponse.bookingDetail!.status == BookingStatusKeys.complete))) {
       return AppButton(
         text: bookingResponse.bookingDetail!.paymentStatus == SERVICE_PAYMENT_STATUS_ADVANCE_PAID && bookingResponse.bookingDetail!.status == BookingStatusKeys.complete ? language.lblPayNow : language.payAdvance,
         textColor: Colors.white,
@@ -950,7 +955,8 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           PaymentScreen(bookings: bookingResponse, isForAdvancePayment: true).launch(context);
         },
       );
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pending || bookingResponse.bookingDetail!.status == BookingStatusKeys.accept) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pending || bookingResponse.bookingDetail!.status == BookingStatusKeys.accept) {
       return AppButton(
         text: language.lblCancelBooking,
         textColor: Colors.white,
@@ -1031,7 +1037,8 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           PaymentScreen(bookings: bookingResponse, isForAdvancePayment: false).launch(context);
         },
       );
-    } else if (!bookingResponse.bookingDetail!.isFreeService && bookingResponse.bookingDetail!.status == BookingStatusKeys.complete && !isSentInvoiceOnEmail) {
+    }
+    else if (!bookingResponse.bookingDetail!.isFreeService && bookingResponse.bookingDetail!.status == BookingStatusKeys.complete && !isSentInvoiceOnEmail) {
       return AppButton(
         text: language.requestInvoice,
         textColor: Colors.white,

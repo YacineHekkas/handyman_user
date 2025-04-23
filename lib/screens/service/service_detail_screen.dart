@@ -21,10 +21,12 @@ import 'package:booking_system_flutter/store/service_addon_store.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
+import 'package:booking_system_flutter/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../utils/images.dart';
 import 'addons/service_addons_component.dart';
 
 ServiceAddonStore serviceAddonStore = ServiceAddonStore();
@@ -118,6 +120,8 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> with TickerPr
           await ProviderInfoScreen(providerId: data.id).launch(context);
           setStatusBarColor(Colors.transparent);
         }),
+
+
       ],
     ).paddingAll(16);
   }
