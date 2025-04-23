@@ -956,7 +956,8 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
         },
       );
     }
-    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pending || bookingResponse.bookingDetail!.status == BookingStatusKeys.accept) {
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pending || bookingResponse.bookingDetail!.status == BookingStatusKeys.accept)
+    {
       return AppButton(
         text: language.lblCancelBooking,
         textColor: Colors.white,
@@ -965,7 +966,9 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           _handleCancelClick(status: bookingResponse, isDurationMode: checkTimeDifference(inputDateTime: DateTime.parse(bookingResponse.bookingDetail!.date.validate())));
         },
       );
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.onGoing) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.onGoing)
+    {
       return AppButton(
         text: language.lblStart,
         textColor: Colors.white,
@@ -974,7 +977,9 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           _handleStartClick(status: bookingResponse);
         },
       );
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.inProgress) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.inProgress)
+    {
       return Row(
         children: [
           if (!bookingResponse.service!.isOnlineService.validate())
@@ -997,7 +1002,9 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           ).expand(),
         ],
       ).paddingOnly(left: 16, right: 16, bottom: 16);
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.hold) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.hold)
+    {
       return Row(
         children: [
           AppButton(
@@ -1019,16 +1026,21 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
           ).expand(),
         ],
       ).paddingOnly(left: 16, right: 16, bottom: 16);
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pendingApproval) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.pendingApproval)
+    {
       return Container(
         width: context.width(),
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(color: context.cardColor),
         child: Text(language.lblWaitingForResponse, style: boldTextStyle()).center(),
       );
-    } else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.complete &&
-        (bookingResponse.bookingDetail!.type != SERVICE_TYPE_FREE || bookingResponse.bookingDetail!.paymentMethod == PAYMENT_METHOD_COD) &&
-        bookingResponse.bookingDetail!.paymentId == null) {
+    }
+    else if (bookingResponse.bookingDetail!.status == BookingStatusKeys.complete &&
+        (bookingResponse.bookingDetail!.type != SERVICE_TYPE_FREE
+            || bookingResponse.bookingDetail!.paymentMethod == PAYMENT_METHOD_COD)
+        && bookingResponse.bookingDetail!.paymentId == null)
+    {
       return AppButton(
         text: language.lblPayNow,
         textColor: Colors.white,
