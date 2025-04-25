@@ -1244,7 +1244,12 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsB
         String endDateTime = DateFormat(BOOKING_SAVE_FORMAT).format(DateTime.now());
 
         log('STATUS.BOOKINGDETAIL!.STARTAT: ${status.bookingDetail!.startAt}');
-        num durationDiff = DateTime.parse(endDateTime.validate()).difference(DateTime.parse(status.bookingDetail!.startAt.validate())).inSeconds;
+        DateTime end = DateTime.parse(endDateTime.validate());
+
+        String? startAtStr = status.bookingDetail!.startAt;
+        DateTime start = startAtStr.validate().isNotEmpty ? DateTime.parse(startAtStr!) : DateTime.now();
+
+        num durationDiff = end.difference(start).inSeconds;
 
         Map request = {
           CommonKeys.id: status.bookingDetail!.id.validate(),
