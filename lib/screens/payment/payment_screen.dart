@@ -1,3 +1,4 @@
+import 'package:booking_system_flutter/component/add_review_dialog.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/booking_detail_model.dart';
 import 'package:booking_system_flutter/screens/booking/component/price_common_widget.dart';
@@ -52,14 +53,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
     init();
 
-    if (widget.bookings.service!.isAdvancePayment && widget.bookings.service!.isFixedService && !widget.bookings.service!.isFreeService && widget.bookings.bookingDetail!.bookingPackage == null) {
+    if (widget.bookings.service!.isAdvancePayment
+        && widget.bookings.service!.isFixedService
+        && !widget.bookings.service!.isFreeService
+        && widget.bookings.bookingDetail!.bookingPackage == null)
+    {
       if (widget.bookings.bookingDetail!.paidAmount.validate() == 0) {
         advancePaymentAmount = widget.bookings.bookingDetail!.totalAmount.validate() * widget.bookings.service!.advancePaymentPercentage.validate() / 100;
         totalAmount = widget.bookings.bookingDetail!.totalAmount.validate() * widget.bookings.service!.advancePaymentPercentage.validate() / 100;
       } else {
         totalAmount = widget.bookings.bookingDetail!.totalAmount.validate() - widget.bookings.bookingDetail!.paidAmount.validate();
       }
-    } else {
+    }
+    else {
       totalAmount = widget.bookings.bookingDetail!.totalAmount.validate();
     }
 
@@ -81,7 +87,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     appStore.setLoading(true);
     if (currentPaymentMethod!.type == PAYMENT_METHOD_COD) {
       savePay(paymentMethod: PAYMENT_METHOD_COD, paymentStatus: SERVICE_PAYMENT_STATUS_PENDING);
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_STRIPE) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_STRIPE)
+    {
       StripeServiceNew stripeServiceNew = StripeServiceNew(
         paymentSetting: currentPaymentMethod!,
         totalAmount: totalAmount,
@@ -95,7 +103,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
 
       stripeServiceNew.stripePay();
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_RAZOR) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_RAZOR)
+    {
       RazorPayServiceNew razorPayServiceNew = RazorPayServiceNew(
         paymentSetting: currentPaymentMethod!,
         totalAmount: totalAmount,
@@ -108,7 +118,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
         },
       );
       razorPayServiceNew.razorPayCheckout();
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_FLUTTER_WAVE) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_FLUTTER_WAVE)
+    {
       FlutterWaveServiceNew flutterWaveServiceNew = FlutterWaveServiceNew();
 
       flutterWaveServiceNew.checkout(
@@ -122,7 +134,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           );
         },
       );
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_CINETPAY) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_CINETPAY)
+    {
       List<String> supportedCurrencies = ["XOF", "XAF", "CDF", "GNF", "USD"];
 
       if (!supportedCurrencies.contains(appConfigurationStore.currencyCode)) {
@@ -147,7 +161,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
 
       cinetPayServices.payWithCinetPay(context: context);
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_SADAD_PAYMENT) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_SADAD_PAYMENT)
+    {
       SadadServicesNew sadadServices = SadadServicesNew(
         paymentSetting: currentPaymentMethod!,
         totalAmount: totalAmount,
@@ -162,7 +178,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
 
       sadadServices.payWithSadad(context);
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_PAYPAL) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_PAYPAL)
+    {
       PayPalService.paypalCheckOut(
         context: context,
         paymentSetting: currentPaymentMethod!,
@@ -176,7 +194,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           );
         },
       );
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_AIRTEL) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_AIRTEL)
+    {
       showInDialog(
         context,
         contentPadding: EdgeInsets.zero,
@@ -201,7 +221,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           );
         },
       ).then((value) => appStore.setLoading(false));
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_PAYSTACK) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_PAYSTACK)
+    {
       PayStackService paystackServices = PayStackService();
       appStore.setLoading(true);
       await paystackServices.init(
@@ -223,7 +245,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       await Future.delayed(const Duration(seconds: 1));
       appStore.setLoading(false);
       paystackServices.checkout();
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_MIDTRANS) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_MIDTRANS)
+    {
       MidtransService midtransService = MidtransService();
       appStore.setLoading(true);
       await midtransService.initialize(
@@ -246,7 +270,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       await Future.delayed(const Duration(seconds: 1));
       appStore.setLoading(false);
       midtransService.midtransPaymentCheckout();
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_PHONEPE) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_PHONEPE)
+    {
       PhonePeServices peServices = PhonePeServices(
         paymentSetting: currentPaymentMethod!,
         totalAmount: totalAmount.toDouble(),
@@ -262,7 +288,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
 
       peServices.phonePeCheckout(context);
-    } else if (currentPaymentMethod!.type == PAYMENT_METHOD_FROM_WALLET) {
+    }
+    else if (currentPaymentMethod!.type == PAYMENT_METHOD_FROM_WALLET)
+    {
       savePay(
         paymentMethod: PAYMENT_METHOD_FROM_WALLET,
         paymentStatus: widget.isForAdvancePayment ? SERVICE_PAYMENT_STATUS_ADVANCE_PAID : SERVICE_PAYMENT_STATUS_PAID,
@@ -283,7 +311,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
       CommonKeys.paymentMethod: paymentMethod,
     };
 
-    if (widget.bookings.service != null && widget.bookings.service!.isAdvancePayment && widget.bookings.service!.isFixedService && !widget.bookings.service!.isFreeService && widget.bookings.bookingDetail!.bookingPackage == null) {
+    if (widget.bookings.service != null && widget.bookings.service!.isAdvancePayment && widget.bookings.service!.isFixedService && !widget.bookings.service!.isFreeService && widget.bookings.bookingDetail!.bookingPackage == null)
+    {
       request[AdvancePaymentKey.advancePaymentAmount] = advancePaymentAmount ?? widget.bookings.bookingDetail!.paidAmount;
 
       if ((widget.bookings.bookingDetail!.paymentStatus == null || widget.bookings.bookingDetail!.paymentStatus != SERVICE_PAYMENT_STATUS_ADVANCE_PAID || widget.bookings.bookingDetail!.paymentStatus != SERVICE_PAYMENT_STATUS_PAID) &&
@@ -297,7 +326,31 @@ class _PaymentScreenState extends State<PaymentScreen> {
     appStore.setLoading(true);
     savePayment(request).then((value) {
       appStore.setLoading(false);
-      push(DashboardScreen(redirectToBooking: true), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+      print("GGGGGGGg");
+
+      showDialog(
+        context: context,
+        barrierDismissible: false, // Prevent tapping outside to close
+        builder: (context) {
+          return PopScope(
+            canPop: false, // Prevent back button
+            child: Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              insetPadding: EdgeInsets.symmetric(horizontal: 24), // Avoid full width
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 400), // Limit dialog width
+                child: AddReviewDialog(
+                  serviceId: widget.bookings.bookingDetail!.serviceId.validate(),
+                  bookingId: widget.bookings.bookingDetail!.id.validate(),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+
+      // push(AddReviewDialog(serviceId: widget.bookings.bookingDetail!.serviceId.validate(), bookingId: widget.bookings.bookingDetail!.id.validate()));
+      // push(DashboardScreen(redirectToBooking: true), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
     }).catchError((e) {
       toast(e.toString());
       appStore.setLoading(false);

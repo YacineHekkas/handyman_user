@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../screens/dashboard/dashboard_screen.dart';
 import 'chat_gpt_loder.dart';
 
 class AddReviewDialog extends StatefulWidget {
@@ -117,6 +118,7 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
         finish(context, false);
       });
     }
+    push(DashboardScreen(redirectToBooking: true), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
 
     appStore.setLoading(false);
   }
@@ -140,11 +142,12 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                 ),
                 child: Row(
                   children: [
+
                     Text(language.yourReview, style: boldTextStyle(color: Colors.white)).expand(),
                     IconButton(
-                      icon: Icon(Icons.clear, color: Colors.white, size: 16),
+                      icon: Icon(Icons.clear, color: Colors.transparent, size: 16),
                       onPressed: () {
-                        finish(context);
+                        // finish(context);
                       },
                     )
                   ],
@@ -194,42 +197,92 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                     ).copyWith(fillColor: context.cardColor, filled: true),
                   ),
                   32.height,
-                  Row(
-                    children: [
-                      AppButton(
-                        text: isHandymanUpdate ? language.lblDelete : language.lblCancel,
-                        textColor: isHandymanUpdate ? Colors.red : textPrimaryColorGlobal,
-                        color: context.cardColor,
-                        onTap: () {
-                          if (isHandymanUpdate) {
-                            showConfirmDialogCustom(
-                              context,
-                              primaryColor: context.primaryColor,
-                              title: language.lblDeleteRatingMsg,
-                              positiveText: language.lblYes,
-                              negativeText: language.lblCancel,
-                              onAccept: (c) async {
-                                appStore.setLoading(true);
+                  if(isHandymanUpdate)
+                    Row(
+                      children: [
+                        // AppButton(
+                        //   text: isHandymanUpdate ? language.lblDelete : language.lblCancel,
+                        //   textColor: isHandymanUpdate ? Colors.red : textPrimaryColorGlobal,
+                        //   color: context.cardColor,
+                        //   onTap: () {
+                        //     if (isHandymanUpdate) {
+                        //       showConfirmDialogCustom(
+                        //         context,
+                        //         primaryColor: context.primaryColor,
+                        //         title: language.lblDeleteRatingMsg,
+                        //         positiveText: language.lblYes,
+                        //         negativeText: language.lblCancel,
+                        //         onAccept: (c) async {
+                        //           appStore.setLoading(true);
+                        //
+                        //           await deleteHandymanReview(id: widget.customerReview!.id.validate().toInt()).then((value) {
+                        //             toast(value.message);
+                        //             finish(context, true);
+                        //           }).catchError((e) {
+                        //             toast(e.toString());
+                        //           });
+                        //
+                        //           setState(() {});
+                        //
+                        //           appStore.setLoading(false);
+                        //         },
+                        //       );
+                        //     } else {
+                        //       finish(context);
+                        //     }
+                        //   },
+                        // ).expand(),
+                        if(isHandymanUpdate )
+                          AppButton(
+                              text:  language.lblDelete ,
+                              textColor: Colors.red ,
+                              color: context.cardColor,
+                              onTap: () {
 
-                                await deleteHandymanReview(id: widget.customerReview!.id.validate().toInt()).then((value) {
-                                  toast(value.message);
-                                  finish(context, true);
-                                }).catchError((e) {
-                                  toast(e.toString());
-                                });
+                                showConfirmDialogCustom(
+                                  context,
+                                  primaryColor: context.primaryColor,
+                                  title: language.lblDeleteRatingMsg,
+                                  positiveText: language.lblYes,
+                                  negativeText: language.lblCancel,
+                                  onAccept: (c) async {
+                                    appStore.setLoading(true);
 
-                                setState(() {});
+                                    await deleteHandymanReview(id: widget.customerReview!.id.validate().toInt()).then((value) {
+                                      toast(value.message);
+                                      finish(context, true);
+                                    }).catchError((e) {
+                                      toast(e.toString());
+                                    });
 
-                                appStore.setLoading(false);
-                              },
-                            );
-                          } else {
-                            finish(context);
-                          }
-                        },
-                      ).expand(),
-                      16.width,
-                      AppButton(
+                                    setState(() {});
+
+                                    appStore.setLoading(false);
+                                  },
+                                );
+                              }
+
+                          ).expand(),
+
+                        16.width,
+                        AppButton(
+                          textColor: Colors.white,
+                          text: language.btnSubmit,
+                          color: context.primaryColor,
+                          onTap: () {
+                            if (selectedRating == 0) {
+                              toast(language.lblSelectRating);
+                            } else {
+                              submit();
+                            }
+                          },
+                        ).expand(),
+                      ],
+                    )
+                  else
+                    Container(
+                    alignment: Alignment.center,
+                      child: AppButton(
                         textColor: Colors.white,
                         text: language.btnSubmit,
                         color: context.primaryColor,
@@ -240,9 +293,9 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                             submit();
                           }
                         },
-                      ).expand(),
-                    ],
-                  )
+                      ),
+                    )
+
                 ],
               ).paddingAll(16)
             ],
