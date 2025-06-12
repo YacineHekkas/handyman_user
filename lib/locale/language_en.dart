@@ -1170,6 +1170,8 @@ class LanguageEn extends BaseLanguage {
   String get customerRatingMessage => 'Tell others what you think';
 
   @override
+  String get searchtext => 'What are you looking for?	';
+  @override
   String get paymentHistory => 'Payment History';
 
   @override

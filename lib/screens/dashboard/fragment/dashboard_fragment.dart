@@ -9,6 +9,7 @@ import 'package:booking_system_flutter/screens/dashboard/shimmer/dashboard_shimm
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../component/empty_error_state_widget.dart';
@@ -23,6 +24,8 @@ class DashboardFragment extends StatefulWidget {
 
 class _DashboardFragmentState extends State<DashboardFragment> {
   Future<DashboardResponse>? future;
+  late BannerAd _bannerAd;
+  bool _isAdLoaded = false;
 
   @override
   void initState() {
@@ -37,6 +40,25 @@ class _DashboardFragmentState extends State<DashboardFragment> {
 
       setState(() {});
     });
+
+    _bannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-8074551090578904/2939981344',
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          print('Failed to load ad: $error');
+        },
+      ),
+    );
+
+    _bannerAd.load();
   }
 
   void init() async {
@@ -117,11 +139,19 @@ class _DashboardFragmentState extends State<DashboardFragment> {
                       },
                     ),
                     30.height,
+
                     PendingBookingComponent(upcomingConfirmedBooking: snap.upcomingData),
                     CategoryComponent(categoryList: snap.category.validate()),
+                    if (_isAdLoaded)
+                      Container(
+                        alignment: Alignment.center,
+                        width: _bannerAd.size.width.toDouble(),
+                        height: _bannerAd.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd),
+                      ),
                     16.height,
                     FeaturedServiceListComponent(serviceList: snap.featuredServices.validate()),
-                    ServiceListComponent(serviceList: snap.service.validate()),
+                    ServiceListComponent( serviceList: snap.service.validate() ),
                     16.height,
                     if (appConfigurationStore.jobRequestStatus) NewJobRequestComponent(),
                   ],

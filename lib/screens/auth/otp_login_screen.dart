@@ -268,7 +268,8 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
                       ).paddingOnly(left: 8),
                     ),
                   ),
-                ).onTap(() => changeCountry()).fit(fit: BoxFit.cover),
+                ),
+                    //.onTap(() => changeCountry()).fit(fit: BoxFit.cover),
                 10.width,
                 // Mobile number text field...
                 AppTextField(
@@ -279,10 +280,15 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
                     hintText: '${language.lblExample}: ${selectedCountry.example}',
                     hintStyle: secondaryTextStyle(),
                   ),
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(9), // Limit to 9 characters
+                    FilteringTextInputFormatter.digitsOnly, // Allow digits only
+                  ],
                   autoFocus: true,
                   onFieldSubmitted: (s) {
                     sendOTP();
                   },
+
                 ).expand(),
               ],
             ),

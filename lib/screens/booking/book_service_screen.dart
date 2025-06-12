@@ -289,15 +289,15 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
                 maxLines: 10,
                 minLines: 3,
                 isValidationRequired: false,
-                enableChatGPT: appConfigurationStore.chatGPTStatus,
-                promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
-                  hintText: language.writeHere,
-                  fillColor: context.scaffoldBackgroundColor,
-                  filled: true,
-                  hintStyle: primaryTextStyle(),
-                ),
-                testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
-                loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
+                // enableChatGPT: appConfigurationStore.chatGPTStatus,
+                // promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
+                //   hintText: language.writeHere,
+                //   fillColor: context.scaffoldBackgroundColor,
+                //   filled: true,
+                //   hintStyle: primaryTextStyle(),
+                // ),
+                // testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
+                // loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
                 onFieldSubmitted: (s) {
                   widget.data.serviceDetail!.bookingDescription = s;
                 },
@@ -428,12 +428,12 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TextButton(
-              child: Text(language.lblChooseFromMap, style: boldTextStyle(color: primaryColor, size: 13)),
-              onPressed: () {
-                _handleSetLocationClick();
-              },
-            ).flexible(),
+            // TextButton(
+            //   child: Text(language.lblChooseFromMap, style: boldTextStyle(color: primaryColor, size: 13)),
+            //   onPressed: () {
+            //     _handleSetLocationClick();
+            //   },
+            // ).flexible(),
             TextButton(
               onPressed: _handleCurrentLocationClick,
               child: Text(language.lblUseCurrentLocation, style: boldTextStyle(color: primaryColor, size: 13), textAlign: TextAlign.right),

@@ -2014,4 +2014,7 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get removeImage => 'Bild entfernen';
+
+  @override
+  String get searchtext => "";
 }

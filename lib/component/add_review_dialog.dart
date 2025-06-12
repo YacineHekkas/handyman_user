@@ -182,14 +182,14 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                     textFieldType: TextFieldType.OTHER,
                     minLines: 5,
                     maxLines: 10,
-                    enableChatGPT: appConfigurationStore.chatGPTStatus,
-                    promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
-                      hintText: language.writeHere,
-                      fillColor: context.scaffoldBackgroundColor,
-                      filled: true,
-                    ),
-                    testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
-                    loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
+                    // enableChatGPT: appConfigurationStore.chatGPTStatus,
+                    // promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
+                    //   hintText: language.writeHere,
+                    //   fillColor: context.scaffoldBackgroundColor,
+                    //   filled: true,
+                    // ),
+                    // testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
+                    // loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
                     textCapitalization: TextCapitalization.sentences,
                     decoration: inputDecoration(
                       context,

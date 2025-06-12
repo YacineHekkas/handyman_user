@@ -164,6 +164,8 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get totalAmount => 'المبلغ الإجمالي';
+  @override
+  String get searchtext => 'ماذا تبحث عنه؟';
 
   @override
   String get applyCoupon => 'تطبيق القسيمة';
@@ -172,7 +174,7 @@ class LanguageAr extends BaseLanguage {
   String get priceDetail => 'تفاصيل السعر';
 
   @override
-  String get home => 'الصفحة الرئيسية';
+  String get home => ' الرئيسية';
 
   @override
   String get category => 'فئة';

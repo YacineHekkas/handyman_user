@@ -70,9 +70,7 @@ class _SearchServiceScreenState extends State<SearchServiceScreen> {
     );
   }
 
-  String get setSearchString {
-    return "What you are looking for?";
-  }
+
 
   bool get isFilterApplied {
     return filterStore.providerId.isNotEmpty || filterStore.handymanId.isNotEmpty || filterStore.ratingId.isNotEmpty || filterStore.categoryId.isNotEmpty || filterStore.isPriceMax.isNotEmpty || filterStore.isPriceMin.isNotEmpty;
@@ -100,7 +98,7 @@ class _SearchServiceScreenState extends State<SearchServiceScreen> {
     return GestureDetector(
       onTap: () => hideKeyboard(context),
       child: AppScaffold(
-        appBarTitle: setSearchString,
+        appBarTitle: language.searchtext,
         child: SizedBox(
           height: context.height(),
           width: context.width(),
@@ -134,7 +132,7 @@ class _SearchServiceScreenState extends State<SearchServiceScreen> {
                         setState(() {});
                       },
                       decoration: inputDecoration(context).copyWith(
-                        hintText: "${language.lblSearchFor} $setSearchString",
+                        hintText: "${language.lblSearchFor} ...",
                         prefixIcon: ic_search.iconImage(size: 10).paddingAll(14),
                         hintStyle: secondaryTextStyle(),
                       ),

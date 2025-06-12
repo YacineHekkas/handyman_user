@@ -11,6 +11,8 @@ abstract class BaseLanguage {
 
   String get getStarted;
 
+  String get searchtext;
+
   String get signIn;
 
   String get signUp;

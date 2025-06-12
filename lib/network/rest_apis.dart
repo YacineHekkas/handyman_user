@@ -27,6 +27,7 @@ import 'package:booking_system_flutter/model/user_wallet_history.dart';
 import 'package:booking_system_flutter/model/verify_transaction_response.dart';
 import 'package:booking_system_flutter/network/network_utils.dart';
 import 'package:booking_system_flutter/screens/dashboard/dashboard_screen.dart';
+import 'package:booking_system_flutter/store/app_store.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -300,15 +301,69 @@ Future<DashboardResponse> userDashboard({bool isCurrentLocation = false, double?
 
   if (isCurrentLocation && appStore.isLoggedIn && appStore.userId.validate() != 0) {
     endPoint = "$endPoint?latitude=$lat&longitude=$long&customer_id=${appStore.userId.validate()}";
-  } else if (isCurrentLocation) {
-    endPoint = "$endPoint?latitude=$lat&longitude=$long";
-  } else if (appStore.isLoggedIn && appStore.userId.validate() != 0) {
-    endPoint = "$endPoint?customer_id=${appStore.userId.validate()}";
+  }
+  else if (isCurrentLocation) {
+    endPoint = "$endPoint?latitude=$lat&longitude=$long&locale=${appStore.selectedLanguageCode}";
+  }
+  else if (appStore.isLoggedIn && appStore.userId.validate() != 0) {
+    endPoint = "$endPoint?customer_id=${appStore.userId.validate()}&locale=${appStore.selectedLanguageCode}";
+  }
+  else {
+    endPoint = "$endPoint?locale=${appStore.selectedLanguageCode}";
   }
 
   try {
+    print("ggssgssg$endPoint");
     final dashboardResponse = DashboardResponse.fromJson(await handleResponse(await buildHttpResponse(endPoint, method: HttpMethodType.GET)));
     appStore.setLoading(false);
+
+    final list = dashboardResponse.service;
+    final listcat =  dashboardResponse.category;
+
+    // final listservfeat = dashboardResponse.featuredServices;
+    //
+    // print(list!.first.name);
+    //
+    for (var service in list!) {
+      if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+        service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+        service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+        service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+      }
+    }
+    //
+    // if (listservfeat != null){
+    //   for (var service in listservfeat!) {
+    //     if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+    //       service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+    //       service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+    //       service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+    //     }
+    //   }
+    // }
+
+    if(listcat != null){
+      for (var cat in listcat!) {
+        if (cat.name != null ) {
+          print(cat.name);
+          cat.name = localizeText(cat.name ?? '', appStore.selectedLanguageCode);
+        }
+      }
+
+    }
+
+
+
+
+    //
+    // for (var service in list!) {
+    //   if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+    //     service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+    //     service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+    //     service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+    //   }
+    //
+    // }
 
     cachedDashboardResponse = dashboardResponse;
 
@@ -323,6 +378,8 @@ Future<DashboardResponse> userDashboard({bool isCurrentLocation = false, double?
     appStore.setLoading(false);
     completer.completeError(e);
   }
+
+
 
   return completer.future;
 }
@@ -390,6 +447,7 @@ Future<BaseResponseModel> walletTopUp(Map req) async {
 
 //region Service Api
 Future<ServiceDetailResponse> getServiceDetails({required int serviceId, int? customerId, bool fromBooking = false}) async {
+  AppStore appStore = AppStore();
   if (fromBooking) {
     toast(language.pleaseWait);
   }
@@ -397,12 +455,41 @@ Future<ServiceDetailResponse> getServiceDetails({required int serviceId, int? cu
   try {
     var res = ServiceDetailResponse.fromJson(await handleResponse(await buildHttpResponse('service-detail', request: request, method: HttpMethodType.POST)));
 
+    // res.serviceDetail?.name = localizeText(res.serviceDetail?.name,appStore.selectedLanguageCode);
+    // res.serviceDetail?.categoryName= localizeText(res.serviceDetail?.categoryName,appStore.selectedLanguageCode);
+    // res.serviceDetail?.subCategoryName = localizeText(res.serviceDetail?.subCategoryName,appStore.selectedLanguageCode);
+
+    print("3434");
+    print(res.serviceDetail?.name);
+    if (res.serviceDetail?.name != null || res.serviceDetail?.categoryName != null || res.serviceDetail?.subCategoryName != null)
+    {
+      res.serviceDetail?.name = localizeText(res.serviceDetail?.name ?? '', appStore.selectedLanguageCode);
+      res.serviceDetail?.categoryName = localizeText(res.serviceDetail?.categoryName ?? '', appStore.selectedLanguageCode);
+      res.serviceDetail?.subCategoryName = localizeText(res.serviceDetail?.subCategoryName ?? '', appStore.selectedLanguageCode);
+    }
     appStore.setLoading(false);
     return res;
   } catch (e) {
     appStore.setLoading(false);
 
     throw e;
+  }
+}
+
+String localizeText(String? text, String languageCode) {
+  if (!text!.contains('|')) return text.trim();
+
+  final parts = text.split('|').map((e) => e.trim()).toList();
+
+  switch (languageCode) {
+    case 'fr':
+      return parts[0];
+    case 'en':
+      return parts.length > 1 ? parts[1] : parts[0];
+    case 'ar':
+      return parts.length > 2 ? parts[2] : parts.last;
+    default:
+      return text;
   }
 }
 
@@ -420,7 +507,8 @@ Future<List<ServiceData>> searchServiceAPI({
   int page = 1,
   required List<ServiceData> list,
   Function(bool)? lastPageCallBack,
-}) async {
+}) async
+{
   String categoryIds = categoryId.isNotEmpty ? 'category_id=$categoryId&' : '';
   String searchPara = search.isNotEmpty ? 'search=$search&' : '';
   String providerIds = providerId.isNotEmpty ? 'provider_id=$providerId&' : '';
@@ -444,8 +532,19 @@ Future<List<ServiceData>> searchServiceAPI({
       await buildHttpResponse('search-list?$categoryIds$customerId$providerIds$isPriceMinPara$isPriceMaxPara$ratingPara$subCategorys$searchPara$latitudes$longitudes$isFeatures$pages$perPages'),
     ));
 
+
     if (page == 1) list.clear();
     list.addAll(res.serviceList.validate());
+
+    for (var service in list) {
+      if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+        service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+        service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+        service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+      }
+
+    }
+
 
     lastPageCallBack?.call(res.serviceList.validate().length != PER_PAGE_ITEM);
     appStore.setLoading(false);
@@ -461,20 +560,43 @@ Future<List<ServiceData>> searchServiceAPI({
 //region Category Api
 
 Future<CategoryResponse> getCategoryList(String page) async {
-  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list?page=$page&per_page=50', method: HttpMethodType.GET)));
+  final res = CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list?page=$page&per_page=50&locale=${appStore.selectedLanguageCode}', method: HttpMethodType.GET)));
+  var list = res.categoryList;
+
+  print("get category");
+
+  for (var cat in list!) {
+    if (cat.name != null ) {
+      cat.name = localizeText(cat.name ?? '', appStore.selectedLanguageCode);
+
+    }
+
+
+  }
+  return res;
 }
 
 Future<List<CategoryData>> getCategoryListWithPagination(int page, {var perPage = PER_PAGE_CATEGORY_ITEM, required List<CategoryData> categoryList, Function(bool)? lastPageCallBack}) async {
   try {
-    CategoryResponse res = CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list?per_page=$perPage&page=$page', method: HttpMethodType.GET)));
+    CategoryResponse res = CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list?per_page=$perPage&page=$page&locale=${appStore.selectedLanguageCode}', method: HttpMethodType.GET)));
 
     if (page == 1) categoryList.clear();
     categoryList.addAll(res.categoryList.validate());
-
     cachedCategoryList = categoryList;
 
     lastPageCallBack?.call(res.categoryList.validate().length != PER_PAGE_CATEGORY_ITEM);
 
+
+    print("get category2");
+
+    for (var cat in categoryList) {
+      print(cat.name);
+      if (cat.name != null ) {
+        cat.name = localizeText(cat.name ?? '', appStore.selectedLanguageCode);
+
+      }
+
+    };
     appStore.setLoading(false);
   } catch (e) {
     appStore.setLoading(false);
@@ -490,6 +612,17 @@ Future<CategoryResponse> getSubCategoryList({required int catId}) async {
   try {
     CategoryResponse res = CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('subcategory-list?category_id=$catId&per_page=all', method: HttpMethodType.GET)));
     appStore.setLoading(false);
+
+    print("------11");
+    final listcat =  res.categoryList;
+
+    if (listcat != null){
+      for (var service in listcat!) {
+        if (service.name != null ) {
+          service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+        }
+      }
+    }
 
     return res;
   } catch (e) {
@@ -517,6 +650,18 @@ Future<List<CategoryData>> getSubCategoryListAPI({required int catId}) async {
       cachedSubcategoryList[index] = (catId, res.categoryList.validate());
     }
 
+    final listcat =  res.categoryList;
+
+    if (listcat != null){
+      for (var service in listcat!) {
+        print("ggg");
+        print(service.name);
+        if (service.name != null ) {
+          service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+        }
+      }
+    }
+
     return res.categoryList.validate();
   } catch (e) {
     appStore.setLoading(false);
@@ -530,6 +675,14 @@ Future<List<CategoryData>> getSubCategoryListAPI({required int catId}) async {
 Future<ProviderInfoResponse> getProviderDetail(int id, {int? userId}) async {
   try {
     ProviderInfoResponse res = ProviderInfoResponse.fromJson(await handleResponse(await buildHttpResponse('user-detail?id=$id&login_user_id=$userId', method: HttpMethodType.GET)));
+   final list =  res.serviceList;
+    for (var service in list!) {
+      if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+        service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+        service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+        service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+      }
+    }
     appStore.setLoading(false);
     if (!cachedProviderList.any((element) => element?.$1 == id)) {
       cachedProviderList.add((id, res));
@@ -577,9 +730,23 @@ Future<List<BookingData>> getBookingList(int page, {var perPage = PER_PAGE_ITEM,
     bookings.addAll(res.data.validate());
     lastPageCallback?.call(res.data.validate().length != PER_PAGE_ITEM);
 
+
+    final list = res.data;
+
+    print("------------");
+
+
+    for (var service in list!) {
+      if (service.serviceName != null ) {
+        service.serviceName = localizeText(service.serviceName ?? '', appStore.selectedLanguageCode);
+
+      }
+    }
     cachedBookingList = bookings;
 
     appStore.setLoading(false);
+
+
 
     return bookings;
   } catch (e) {
@@ -603,6 +770,21 @@ Future<BookingDetailResponse> getBookingDetail(Map<String, dynamic> request, {Fu
       int index = cachedBookingDetailList.indexWhere((element) => element?.$1 == bookingId);
       cachedBookingDetailList[index] = (bookingId, bookingDetailResponse);
     }
+
+    print("++++++++++");
+    print(bookingDetailResponse.service!.name);
+
+    bookingDetailResponse.service!.name = "GG";
+
+    print(bookingDetailResponse.bookingDetail!.serviceName);
+
+
+      if (bookingDetailResponse.service!.name != null || bookingDetailResponse.service!.categoryName != null || bookingDetailResponse.service!.subCategoryName != null) {
+        bookingDetailResponse.service!.name = localizeText(bookingDetailResponse.service!.name ?? '', appStore.selectedLanguageCode);
+        bookingDetailResponse.bookingDetail!.serviceName = localizeText(bookingDetailResponse.bookingDetail!.serviceName ?? '', appStore.selectedLanguageCode);
+        bookingDetailResponse.service!.categoryName = localizeText(bookingDetailResponse.service!.categoryName ?? '', appStore.selectedLanguageCode);
+        bookingDetailResponse.service!.subCategoryName = localizeText(bookingDetailResponse.service!.subCategoryName ?? '', appStore.selectedLanguageCode);
+      }
 
     appStore.setLoading(false);
     return bookingDetailResponse;
@@ -778,6 +960,12 @@ Future<List<ServiceData>> getWishlist(int page, {var perPage = PER_PAGE_ITEM, re
 
     lastPageCallBack?.call(serviceResponse.serviceList.validate().length != PER_PAGE_ITEM);
 
+    for (var service in services) {
+      service.name = localizeText(service.name, appStore.selectedLanguageCode);
+      service.categoryName = localizeText(service.categoryName, appStore.selectedLanguageCode);
+      service.subCategoryName = localizeText(service.subCategoryName, appStore.selectedLanguageCode);
+    }
+
     cachedServiceFavList = services;
     appStore.setLoading(false);
   } catch (e) {
@@ -827,7 +1015,22 @@ Future<BaseResponseModel> removeProviderWishList(request) async {
 
 //region Get My Service List API
 Future<ServiceResponse> getMyServiceList() async {
-  return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?customer_id=${appStore.userId.validate()}', method: HttpMethodType.GET)));
+  final res = ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?customer_id=${appStore.userId.validate()}', method: HttpMethodType.GET)));
+  print("-------");
+  print(res.serviceList);
+
+
+
+  for (var service in res!.userServices!) {
+    print(service.name);
+
+    if (service.name != null || service.categoryName != null || service.subCategoryName != null) {
+      service.name = localizeText(service.name ?? '', appStore.selectedLanguageCode);
+      service.categoryName = localizeText(service.categoryName ?? '', appStore.selectedLanguageCode);
+      service.subCategoryName = localizeText(service.subCategoryName ?? '', appStore.selectedLanguageCode);
+    }
+  }
+  return res;
 }
 //endregion
 
@@ -847,6 +1050,7 @@ Future<BaseResponseModel> deleteServiceRequest(int id) async {
 
 Future<List<PostJobData>> getPostJobList(int page, {var perPage = PER_PAGE_ITEM, required List<PostJobData> postJobList, Function(bool)? lastPageCallBack}) async {
   try {
+    print("fff");
     var res = GetPostJobResponse.fromJson(await handleResponse(await buildHttpResponse('get-post-job?per_page=$perPage&page=$page', method: HttpMethodType.GET)));
 
     if (page == 1) postJobList.clear();

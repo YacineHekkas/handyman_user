@@ -300,12 +300,12 @@ class _BookPostJobRequestScreenState extends State<BookPostJobRequestScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextButton(
-                            child: Text(language.lblChooseFromMap, style: boldTextStyle(color: context.primaryColor, size: 13)),
-                            onPressed: () {
-                              _handleSetLocationClick();
-                            },
-                          ).flexible(),
+                          // TextButton(
+                          //   child: Text(language.lblChooseFromMap, style: boldTextStyle(color: context.primaryColor, size: 13)),
+                          //   onPressed: () {
+                          //     _handleSetLocationClick();
+                          //   },
+                          // ).flexible(),
                           TextButton(
                             onPressed: _handleCurrentLocationClick,
                             child: Text(language.lblUseCurrentLocation, style: boldTextStyle(color: context.primaryColor, size: 13)),

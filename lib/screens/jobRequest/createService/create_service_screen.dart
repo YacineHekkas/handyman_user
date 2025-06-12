@@ -310,14 +310,14 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                     errorThisFieldRequired: language.requiredText,
                     maxLines: 2,
                     focus: descriptionFocus,
-                    enableChatGPT: appConfigurationStore.chatGPTStatus,
-                    promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
-                      hintText: language.writeHere,
-                      fillColor: context.scaffoldBackgroundColor,
-                      filled: true,
-                    ),
-                    testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
-                    loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
+                    // enableChatGPT: appConfigurationStore.chatGPTStatus,
+                    // promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
+                    //   hintText: language.writeHere,
+                    //   fillColor: context.scaffoldBackgroundColor,
+                    //   filled: true,
+                    // ),
+                    // testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
+                    // loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
                     decoration: inputDecoration(context, labelText: language.serviceDescription),
                     validator: (value) {
                       if (value!.isEmpty) return language.requiredText;

@@ -2015,4 +2015,7 @@ class LanguageHi extends BaseLanguage {
 
   @override
   String get removeImage => 'छवि हटाएँ';
+
+  @override
+  String get searchtext =>"";
 }

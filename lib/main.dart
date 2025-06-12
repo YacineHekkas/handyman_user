@@ -44,6 +44,10 @@ import 'model/category_model.dart';
 import 'model/coupon_list_model.dart';
 import 'model/dashboard_model.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+
+
 //region Handle Background Firebase Message
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   log('Message Data : ${message.data}');
@@ -93,6 +97,8 @@ List<(int bookingId, BookingDetailResponse list)?> cachedBookingDetailList = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await   MobileAds.instance.initialize();
+
   await Firebase.initializeApp().then((value) {
     /// Firebase Notification
     initFirebaseMessaging();

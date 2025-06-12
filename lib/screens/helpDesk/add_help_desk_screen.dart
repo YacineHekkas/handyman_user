@@ -114,14 +114,14 @@ class _AddHelpDeskScreenState extends State<AddHelpDeskScreen> {
                           focus: descriptionFocus,
                           maxLines: 10,
                           minLines: 3,
-                          enableChatGPT: appConfigurationStore.chatGPTStatus,
-                          promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
-                            hintText: language.writeHere,
-                            fillColor: context.scaffoldBackgroundColor,
-                            filled: true,
-                            hintStyle: primaryTextStyle(),
-                          ),
-                          testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
+                          // enableChatGPT: appConfigurationStore.chatGPTStatus,
+                          // promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
+                          //   hintText: language.writeHere,
+                          //   fillColor: context.scaffoldBackgroundColor,
+                          //   filled: true,
+                          //   hintStyle: primaryTextStyle(),
+                          // ),
+                          // testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
                           loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
                           decoration: inputDecoration(
                             context,
