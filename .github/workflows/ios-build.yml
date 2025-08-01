@@ -27,10 +27,11 @@ jobs:
         run: flutter pub get
 
       # 5. Install iOS pods (and update repo so specs are fresh)
-      - name: CocoaPods install
+      - name: CocoaPods install (force update)
         working-directory: ios
         run: |
           pod repo update
+          pod update Firebase/Messaging GoogleUtilities/UserDefaults
           pod install
 
       # 6. Build the iOS release without code signing
