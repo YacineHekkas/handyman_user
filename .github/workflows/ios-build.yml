@@ -6,18 +6,41 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
+      # 1. Checkout your code
       - uses: actions/checkout@v3
 
+      # 2. Set up Flutter
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.1'  # or your version
+          flutter-version: '3.27.1'
 
-      - run: flutter pub get
+      # 3. Install CocoaPods via Homebrew
+      - name: Install CocoaPods
+        run: |
+          brew update
+          brew install cocoapods
 
-      - run: flutter build ios --release --no-codesign
+      # 4. Fetch Dart & Flutter dependencies
+      - name: Flutter Pub Get
+        run: flutter pub get
 
+      # 5. Force CocoaPods to use the freshest specs & update every pod
+      - name: CocoaPods repo update & full pod update
+        working-directory: ios
+        run: |
+          # Refresh CocoaPods spec repos
+          pod repo update
+          # Update ALL pods to their latest versions
+          pod update --verbose
+          # Now install into the workspace
+          pod install --verbose
+
+      # 6. Build the iOS app without code signing
+      - name: Build iOS App (no codesign)
+        run: flutter build ios --release --no-codesign
+
+      # 7. Upload the resulting .app as an artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
