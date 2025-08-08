@@ -6,7 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 Future<Color> getMaterialYouData() async {
   if (appStore.useMaterialYouTheme && await isAndroid12Above()) {
-    primaryColor = await getMaterialYouPrimaryColor();
+    primaryColor = (await getMaterialYouPrimaryColor())!;
   } else {
     primaryColor = defaultPrimaryColor;
   }
